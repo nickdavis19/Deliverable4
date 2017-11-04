@@ -9,10 +9,8 @@ public class Deliverable4 {
 		HashMap<String, String> eleMap;
 		List<String> namesToTest;
 		String _file = new String(args[0]);//read the filename from the command line
-		if(args[1].isEmpty()){
-			//if there are no more arguments other than the first one, it's ok to continue
-		}else{
-			System.out.println("Please enter only one argument, the file to read.");
+		if(args.size() != 1){
+			System.out.println("Please enter only one argument, the file to read.")
 			System.exit(0);
 		}
 		eleMap = hashIt("elements.txt");//always read the elements from this .txt file, as its formatted
