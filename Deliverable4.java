@@ -10,11 +10,11 @@ public class Deliverable4 {
 		List<String> namesToTest;
 		StringBuilder elementsString = new StringBuilder();
 		StringBuilder prefixString = new StringBuilder();
-		String _file = new String(args[0]);//read the filename from the command line
 		if(args.length != 1){
 			System.out.println("Please enter only one argument, the file to read.");
 			System.exit(0);
 		}
+		String _file = new String(args[0]);//read the filename from the command line
 		eleMap = hashIt("elements.txt");//always read the elements from this .txt file, as its formatted
 		namesToTest = readFile(_file);
 		
@@ -90,6 +90,9 @@ public class Deliverable4 {
 			System.out.println("Unable to find the file: " + _filename);
 		}catch(IOException ex){
 			System.out.println("Unable to read the file: "+ _filename);
+		}
+		catch(ArrayIndexOutOfBoundsException aiobe){
+			System.out.println("Unable to hash the file: "+ _filename);
 		}
 		return map;
 	}
