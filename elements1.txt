@@ -1,0 +1,7 @@
+"Ac": "Actinium",
+"Ag": "Silver",
+"Al": "Aluminum",
+"Am": "Americium",
+"Ar": "Argon",
+"As": "Arsenic",
+"At": "Astatine",
