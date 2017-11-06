@@ -10,11 +10,11 @@ public class Deliverable4 {
 		List<String> namesToTest;
 		StringBuilder elementsString = new StringBuilder();
 		StringBuilder prefixString = new StringBuilder();
+		String _file = new String(args[0]);//read the filename from the command line
 		if(args.length != 1){
 			System.out.println("Please enter only one argument, the file to read.");
 			System.exit(0);
 		}
-		String _file = new String(args[0]);//read the filename from the command line
 		eleMap = hashIt("elements.txt");//always read the elements from this .txt file, as its formatted
 		namesToTest = readFile(_file);
 		
@@ -27,22 +27,26 @@ public class Deliverable4 {
 	}
 	
 	public static boolean buildName(String name, HashMap<String, String> elements, StringBuilder eleString, StringBuilder preString){
+		String _name = name;
+		_name = _name.replaceAll("\\s+", "");//removes whitespace from the line
+		_name = _name.replaceAll("\\W+", "");//removes all special characters from the line read in
+		_name = _name.toLowerCase();//standardizes it as lower case
 		eleString.delete(0, eleString.length());
 		preString.delete(0, preString.length());
-		String _name = name;
 		String theElement = null; //theElement = the name of the element that is matched to our substring
 		int low = 0; //low = the lowest index of the name that forms the substring we're trying to match
 		int high = 2; //high = the highest index of the name that forms the substring we're trying to match
 		while(low < _name.length()){
+			while(high > _name.length()){//prevents an index out of bounds exception
+				high--;
+			}
 			String currentSearch = _name.substring(low, high); //forms a substring from the name from low to high exclusive
-			System.out.println("Current search:" +currentSearch);
 		
 			while(theElement == null){ //matches the substring to an element name
 				theElement = elements.get(currentSearch);
-				System.out.println("The Element: "+theElement);
 				if(theElement == null){ //if the current substring has no element name, decrement the size of the substring and look again
 					if(low == high){
-						System.out.println("Could not create name \"" + _name + "\" out of elements.");
+						System.out.println("Could not create name \"" + name + "\" out of elements.");
 						return false;
 					}
 					high--;
@@ -52,13 +56,19 @@ public class Deliverable4 {
 		
 			preString.append(currentSearch);
 			eleString.append(theElement);
-			System.out.println("prestring: "+preString);
-			System.out.println("eleString: "+eleString);
+			if(high < _name.length()){
+				preString.append(" - ");
+				eleString.append(" - ");
+			}
+			//System.out.println("prestring: "+preString);
+			//System.out.println("eleString: "+eleString);
 			
 			low = high; //advances the lowest index to the lowest index that hasn't been matched yet
 			high = low + 2; //advances the highes index to the lowest index + 2 to make a 2 character substring (largest element prefixes are 2 characters long)
 			theElement = null;
 		}
+		System.out.println(preString);
+		System.out.println(eleString);
 		return true;
 	}
 	
@@ -91,9 +101,6 @@ public class Deliverable4 {
 		}catch(IOException ex){
 			System.out.println("Unable to read the file: "+ _filename);
 		}
-		catch(ArrayIndexOutOfBoundsException aiobe){
-			System.out.println("Unable to hash the file: "+ _filename);
-		}
 		return map;
 	}
 	
@@ -112,9 +119,6 @@ public class Deliverable4 {
 			BufferedReader br = new BufferedReader(fr);
 			
 			while((line = br.readLine()) != null){
-				line = line.replaceAll("\\s+", "");//removes whitespace from the line
-				line = line.replaceAll("\\W+", "");//removes all special characters from the line read in
-				line = line.toLowerCase();//standardizes it as lower case
 				theFile.add(line);
 			}
 		}catch(FileNotFoundException ex){
