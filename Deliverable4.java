@@ -119,7 +119,11 @@ public class Deliverable4 {
 			BufferedReader br = new BufferedReader(fr);
 			
 			while((line = br.readLine()) != null){
-				theFile.add(line);
+				if(line.isEmpty()){
+					
+				}else{
+					theFile.add(line);
+				}
 			}
 		}catch(FileNotFoundException ex){
 			System.out.println("Unable to find the file: " + _filename);
