@@ -28,8 +28,15 @@ public class Deliverable4Test {
     HashMap<String, String> map = new HashMap<String, String>();
     map.put("ac", "actinium");
     map.put("ag", "silver");
+    map.put("al", "aluminum");
+    map.put("am", "americium");
+    map.put("ar", "argon");
+    map.put("as", "arsenic");
+    map.put("at", "astatine");
 
-    assertEquals(map, d4.hashIt("elements.txt"));
+
+
+    assertEquals(map, d4.hashIt("elements1.txt"));
 
 	}
 
@@ -97,7 +104,7 @@ public class Deliverable4Test {
     Deliverable4 d4 = new Deliverable4();
 
     List<String> theFile = new ArrayList<String>();
-    theFile.add("tsar");
+    theFile.add("Tsar");
 
     //call the hashIt function with a misformatted file (specifically does not have any :'s in it)
     assertEquals(theFile, d4.readFile("test.txt"));
