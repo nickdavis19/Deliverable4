@@ -34,8 +34,6 @@ public class Deliverable4Test {
     map.put("as", "arsenic");
     map.put("at", "astatine");
 
-
-
     assertEquals(map, d4.hashIt("elements1.txt"));
 
 	}
@@ -110,8 +108,107 @@ public class Deliverable4Test {
     assertEquals(theFile, d4.readFile("test.txt"));
 
   }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // name doesn't match an element
+    
+    // name is numbers
+    // name has a bunch of special characters
+    // name is not lowercase
+    
+    // Test buildName with a valid and good option
+    @Test
+    public void buildName_test1(){
+        //create a Deliverable4 object
+        Deliverable4 d4 = new Deliverable4();
+        
+        String name = "acag";
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("ac", "actinium");
+        map.put("ag", "silver");
+        map.put("al", "aluminum");
+        map.put("am", "americium");
+        map.put("ar", "argon");
+        map.put("as", "arsenic");
+        map.put("at", "astatine");
+        StringBuilder eleString = new StringBuilder();
+        StringBuilder preString = new StringBuilder();
+ 
+        boolean b = d4.buildName(name, map, eleString, preString);
+        assertTrue(b);
 
-  //Test readfile
+    }
 
+    // Test a buildName with a name that's just an empty string
+    // This should return false from buildName since the string won't match any elements
+    @Test
+    public void buildName_test2(){
+        //create a Deliverable4 object
+        Deliverable4 d4 = new Deliverable4();
+        
+        String name = " ";
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("ac", "actinium");
+        map.put("ag", "silver");
+        map.put("al", "aluminum");
+        map.put("am", "americium");
+        map.put("ar", "argon");
+        map.put("as", "arsenic");
+        map.put("at", "astatine");
+        StringBuilder eleString = new StringBuilder();
+        StringBuilder preString = new StringBuilder();
+        
+        boolean b = d4.buildName(name, map, eleString, preString);
+        assertFalse(b);
+        
+    }
+    
+    // Test a buildName with a name that's only non-letter characters
+    // This should return false from buildName since the string won't match any elements
+    @Test
+    public void buildName_test3(){
+        //create a Deliverable4 object
+        Deliverable4 d4 = new Deliverable4();
+        
+        String name = "4238384**///==--=++++:::::!@@##$%^&*())(*&^%~~~~```";
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("ac", "actinium");
+        map.put("ag", "silver");
+        map.put("al", "aluminum");
+        map.put("am", "americium");
+        map.put("ar", "argon");
+        map.put("as", "arsenic");
+        map.put("at", "astatine");
+        StringBuilder eleString = new StringBuilder();
+        StringBuilder preString = new StringBuilder();
+        
+        boolean b = d4.buildName(name, map, eleString, preString);
+        assertFalse(b);
+        
+    }
+    
+    // Test a buildName with a name that's both non-letter characters and letters that match
+    // This should return true from buildName since the string should match based on just the letters
+    @Test
+    public void buildName_test4(){
+        //create a Deliverable4 object
+        Deliverable4 d4 = new Deliverable4();
+        
+        String name = "4238384**///==--=++++:a888888t::::!@@##$%^&*()----AC--(*&^%~~~~```";
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("ac", "actinium");
+        map.put("ag", "silver");
+        map.put("al", "aluminum");
+        map.put("am", "americium");
+        map.put("ar", "argon");
+        map.put("as", "arsenic");
+        map.put("at", "astatine");
+        StringBuilder eleString = new StringBuilder();
+        StringBuilder preString = new StringBuilder();
+        
+        boolean b = d4.buildName(name, map, eleString, preString);
+        assertTrue(b);
+        
+    }
 
 }
