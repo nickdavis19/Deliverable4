@@ -93,6 +93,10 @@ public class Deliverable4 {
 			FileReader fr = new FileReader(_filename);
 			BufferedReader br = new BufferedReader(fr);
 
+			if (fr.read() == -1){
+				System.out.println("Unable to hash the file: "+ _filename);
+			}
+
 			while((line = br.readLine()) != null){
 				line = line.replaceAll("\\s+", "");//removes whitespace from the line read in
 				line = line.replaceAll("\\x22+", "");//removes all " characters from the line read in
