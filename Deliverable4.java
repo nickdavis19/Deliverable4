@@ -32,7 +32,6 @@ public class Deliverable4 {
 	 _name = _name.replaceAll("[^a-zA-Z]+", "");
 
 	 if(_name.length() < 1){
-			 System.out.println("Here");
 			 System.out.println("Could not create name \"" + _name + "\" out of elements.");
 			 return false;
 	 }
